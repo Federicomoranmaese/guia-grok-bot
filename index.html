@@ -1,1 +1,186 @@
-PLACEHOLDER
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Guía Profunda: Grok Bot en 10 Pasos – Personalizada</title>
+<style>
+  :root {
+    --primary: #1a1a2e;
+    --accent: #16213e;
+    --highlight: #0f3460;
+    --text: #333;
+    --light: #f8f9fa;
+    --card: #ffffff;
+  }
+  body { font-family: 'Segoe UI', system-ui, sans-serif; margin: 0; background: var(--light); color: var(--text); line-height: 1.6; }
+  header { background: linear-gradient(135deg, var(--primary), var(--highlight)); color: white; padding: 2rem; text-align: center; }
+  .container { max-width: 1000px; margin: 0 auto; padding: 1.5rem; }
+  .form-box { background: var(--card); padding: 1.5rem; border-radius: 12px; box-shadow: 0 4px 12px rgba(0,0,0,0.1); margin-bottom: 2rem; }
+  .form-box label { display: block; margin: 0.8rem 0 0.3rem; font-weight: 600; }
+  .form-box input, .form-box select { width: 100%; padding: 0.7rem; border: 1px solid #ddd; border-radius: 6px; font-size: 1rem; }
+  button { background: var(--highlight); color: white; border: none; padding: 0.8rem 1.5rem; border-radius: 6px; cursor: pointer; font-size: 1rem; margin-top: 1rem; }
+  button:hover { background: #0a2647; }
+  .step { background: var(--card); margin: 1.5rem 0; padding: 1.5rem; border-radius: 12px; box-shadow: 0 2px 8px rgba(0,0,0,0.08); border-left: 5px solid var(--highlight); }
+  .step h2 { color: var(--primary); margin-top: 0; }
+  .step img { max-width: 100%; height: auto; border-radius: 8px; margin: 1rem 0; }
+  .example { background: #e8f4fd; padding: 1rem; border-radius: 8px; margin: 1rem 0; border-left: 4px solid #0f3460; }
+  .tip { background: #fff3cd; padding: 0.8rem; border-radius: 6px; font-size: 0.95rem; }
+  footer { text-align: center; padding: 2rem; color: #666; font-size: 0.9rem; }
+  .hidden { display: none; }
+</style>
+</head>
+<body>
+<header>
+  <h1>Guía Profunda: Cómo poner tu negocio en piloto automático con Grok Bot</h1>
+  <p>10 pasos prácticos, explicados a tu nivel y con ejemplos de tu negocio</p>
+</header>
+
+<div class="container">
+  <div class="form-box" id="setupForm">
+    <h2>Personaliza esta guía</h2>
+    <p>Llena los datos y la guía se adaptará a ti (puedes cambiarlos cuando quieras).</p>
+    <label for="usuario">Tu nombre o cómo te llamamos:</label>
+    <input type="text" id="usuario" placeholder="Ej: Federico, María, Equipo..." value="Federico">
+
+    <label for="negocio">Tipo de negocio:</label>
+    <input type="text" id="negocio" placeholder="Ej: Distribuidor de losetas y materiales de construcción" value="Distribuidor de losetas, porcelanato y materiales de construcción">
+
+    <label for="nivel">Nivel de conocimiento técnico / escolar:</label>
+    <select id="nivel">
+      <option value="basico">Básico (explicaciones simples, sin jerga)</option>
+      <option value="intermedio" selected>Intermedio (claro pero con algo de detalle)</option>
+      <option value="avanzado">Avanzado (más técnico y preciso)</option>
+    </select>
+
+    <label for="redes">Presencia en redes sociales de tu negocio (1 = casi nada, 10 = muy activa):</label>
+    <input type="range" id="redes" min="1" max="10" value="6">
+    <span id="redesValue">6</span>
+
+    <button onclick="personalizar()">Actualizar guía</button>
+  </div>
+
+  <div id="contenido">
+    <!-- El contenido se genera/actualiza con JS -->
+  </div>
+</div>
+
+<footer>
+  Basado en el playbook práctico de @irongiantXBT. Adaptado y expandido para uso real.
+</footer>
+
+<script>
+const imagenes = {
+  paso1: "imagine_images/6OjBg.jpg",
+  paso2: "imagine_images/CFna9.jpg",
+  paso7: "imagine_images/6G2i4.jpg",
+  paso10: "imagine_images/El84F.jpg"
+};
+
+function personalizar() {
+  const usuario = document.getElementById('usuario').value || "tú";
+  const negocio = document.getElementById('negocio').value || "tu negocio";
+  const nivel = document.getElementById('nivel').value;
+  const redes = parseInt(document.getElementById('redes').value);
+  document.getElementById('redesValue').textContent = redes;
+
+  const simple = nivel === "basico";
+  const tecnico = nivel === "avanzado";
+
+  let intro = `<p>Hola <strong>${usuario}</strong>, esta guía está adaptada a tu negocio de <strong>${negocio}</strong>.</p>`;
+  if (simple) intro += `<p>Vamos a explicarlo de forma muy clara y paso a paso, sin complicaciones.</p>`;
+  else if (tecnico) intro += `<p>Incluye detalles de implementación, ownership y límites reales del sistema.</p>`;
+
+  const contenido = document.getElementById('contenido');
+  contenido.innerHTML = `
+    ${intro}
+    <div class="step">
+      <h2>01. Instala y conoce a tu Daily Chief</h2>
+      <img src="${imagenes.paso1}" alt="Entregando trabajo al Daily Chief">
+      <p>${simple ? "Primero creas un asistente principal al que le pones nombre (por ejemplo Daily Chief). Le das una tarea pequeña que puedas revisar fácilmente." : "Creas un bot llamado Daily Chief. Empiezas con una asignación real y verificable, no con algo abstracto."}</p>
+      <div class="example">
+        <strong>Ejemplo para tu negocio:</strong> Pídele el brief de mañana: reuniones o visitas de clientes de ${negocio}, mensajes pendientes importantes y qué información aún falta (Open Questions).
+      </div>
+      <p class="tip">Siempre pide que incluya fuentes (de dónde sacó la info) y preguntas abiertas. Así ves qué falta antes de decidir.</p>
+    </div>
+
+    <div class="step">
+      <h2>02. Dale un título y un contrato de rol claro</h2>
+      <img src="${imagenes.paso2}" alt="Contrato de rol: ROLE, INPUTS, OUTPUT, WHEN TO ASK">
+      <p>${simple ? "Escribe en palabras simples qué hace, de dónde saca la información, qué te entrega y cuándo debe preguntarte en vez de inventar." : "Define ROLE, INPUTS, OUTPUT y WHEN TO ASK. Las correcciones que le hagas deben quedarse como reglas permanentes."}</p>
+      <div class="example">
+        <strong>Para ${negocio}:</strong> ROLE: Coordinador de operaciones diarias. INPUTS: Gmail, Calendar, Drive. OUTPUT: Brief con agenda, fuentes y open questions. WHEN TO ASK: Si falta un precio, disponibilidad de stock o una decisión de cliente.
+      </div>
+    </div>
+
+    <div class="step">
+      <h2>03. Conecta las herramientas una sola vez</h2>
+      <p>${simple ? "Conectas tu correo, calendario y Drive una vez. Después todos los bots pueden usarlos." : "Los bots comparten una sola computadora en la nube a nivel de cuenta. Los roles separan responsabilidades, pero no crean cajas de seguridad independientes."}</p>
+      <div class="example">Conecta Gmail (pedidos y proveedores), Google Calendar (visitas a obra o clientes) y Drive (cotizaciones y contratos de ${negocio}).</div>
+    </div>
+
+    <div class="step">
+      <h2>04. Handoff de login cuando haga falta</h2>
+      <p>${simple ? "Si un sitio pide que entres con tu usuario y contraseña, tú lo haces una vez y luego el bot continúa. Nunca le digas tu contraseña en el chat." : "Tomas el control del navegador del bot, completas la autenticación y le devuelves el control. Las sesiones quedan en la computadora compartida."}</p>
+    </div>
+
+    <div class="step">
+      <h2>05. Enséñale una vez y guarda el método (skill)</h2>
+      <p>${simple ? "Haz una tarea con él (o muéstrale cómo la haces). Luego dile que guarde el método para usarlo otra vez con datos diferentes." : "Captura el flujo como skill. Pruébalo con inputs de otro día para confirmar que es reutilizable y no solo un caso de éxito."}</p>
+      <div class="example">Ejemplo: Preparar el resumen de cotizaciones pendientes de ${negocio}. Una vez que funciona bien, guárdalo como skill.</div>
+    </div>
+
+    <div class="step">
+      <h2>06. Convierte lo útil en rutina programada</h2>
+      <p>${simple ? "Si algo funciona bien, dile que lo haga solo todos los días a cierta hora (por ejemplo a las 7:30 de la mañana)." : "Programa la rutina. El trabajo corre en la nube aunque tu computadora esté apagada. Empieza solo con el Chief."}</p>
+      ${redes >= 7 ? `<div class="example">Como tienes buena presencia en redes (${redes}/10), puedes agregar después una rutina que revise menciones o prepare ideas de contenido para ${negocio}.</div>` : ""}
+    </div>
+
+    <div class="step">
+      <h2>07. Contrata especialistas cuando el trabajo se divida</h2>
+      <img src="${imagenes.paso7}" alt="Equipo de bots especialistas">
+      <p>${simple ? "Cuando una sola persona ya no alcanza, creas más bots: uno para el correo, otro para investigar precios o competencia, otro para papelería." : "Separa por responsabilidad clara. El Chief ensambla y entrega el resultado final."}</p>
+      <div class="example">
+        Inbox Lead → mensajes de clientes y proveedores de ${negocio}.<br>
+        Research Scout → precios de competencia o tendencias de materiales.<br>
+        Life Admin → logística, facturas y documentos.<br>
+        Daily Chief → junta todo y te entrega un solo brief.
+      </div>
+    </div>
+
+    <div class="step">
+      <h2>08. Úsalos en un chat de grupo cuando la tarea cruce áreas</h2>
+      <p>${simple ? "Para cosas grandes (como preparar la visita de un cliente importante), los pones a todos en un chat y el Chief coordina." : "El chat de grupo hace visibles los handoffs. Cada bot entrega su parte con fuentes y preguntas pendientes."}</p>
+      <div class="example">Ejemplo real para ${negocio}: Paquete de visita a obra o cliente grande → correspondencia + investigación de materiales + logística, todo en un solo resultado.</div>
+    </div>
+
+    <div class="step">
+      <h2>09. Dibuja la línea de aprobación</h2>
+      <p>${simple ? "Pueden preparar borradores y resúmenes solos. Pero antes de enviar un correo importante o hacer una reserva, te piden permiso con una propuesta clara." : "Requieren ACTION + TARGET + REASON. Termina la preparación antes de pedir la decisión."}</p>
+      <div class="example">Borrador de respuesta a un proveedor de ${negocio} llega con: a quién va, de qué hilo viene y por qué lo recomienda. Tú solo apruebas o corriges.</div>
+    </div>
+
+    <div class="step">
+      <h2>10. Revisa 15 minutos cada semana</h2>
+      <img src="${imagenes.paso10}" alt="Dashboard semanal USED / REWORKED / IGNORED">
+      <p>${simple ? "Una vez a la semana mira qué usaste, qué tuviste que corregir y qué ignoraste. Quédate con lo útil y pausa lo que solo hace ruido." : "Clasifica USED / REWORKED / IGNORED. Una rutina solo se queda si reduce el trabajo que cargas (incluyendo el de revisarla)."}</p>
+      <div class="example">Para ${negocio}: ¿El brief matutino te ahorra tiempo real? ¿Las alertas de redes (si las tienes) valen la pena o solo distraen?</div>
+    </div>
+
+    <div class="step">
+      <h2>Empieza hoy</h2>
+      <p>Elige <strong>una sola tarea</strong> que hagas mañana otra vez en ${negocio}. Dásela a tu primer bot (Daily Chief), revisa el resultado y corrige una cosa. Solo después de eso conviértela en rutina y piensa en especialistas.</p>
+      <p class="tip">El verdadero skill es aprender a delegar un trabajo completo: qué debe estar terminado, qué fuentes importan y dónde el bot debe devolverte la decisión.</p>
+    </div>
+  `;
+}
+
+document.getElementById('redes').addEventListener('input', function() {
+  document.getElementById('redesValue').textContent = this.value;
+});
+
+// Carga inicial
+personalizar();
+</script>
+</body>
+</html>
